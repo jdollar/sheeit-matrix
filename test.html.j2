@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="container columns-3 mx-auto">
+      {% for qr_code in qr_codes %}
+      <div>
+        <figure>
+          <img src="https://quickchart.io/qr?text={{ qr_code.serial_number }}" />
+          <figcaption>{{ qr_code.serial_number }}</figcaption>
+        <figure>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
