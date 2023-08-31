@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Tailwind CSS documentation: https://tailwindcss.com/docs/aspect-ratio -->
+    <!-- Don't panic, just provides a bunch of composable css classes -->
+    <!-- so you don't have to write a bunch of css manually. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style> 
+      .page {
+          page-break-after:always;
+      }
+    </style>
+  </head>
+
+  <!-- The height of each square (where the qr code and the TOS reside) -->
+  <!-- are determined by the h-72 class. If you need to modify the square height, that -->
+  <!-- is the css class you want to modify -->
+
+  <body>
+    {# Each chunk of qr codes gets two pages, 1 for the front (actual qrcode) and 1 for the back (TOS) #}
+    {% for chunked_qr_codes in divide_chunks(qr_codes, qr_codes_per_page) %}
+
+    <div class="grid grid-cols-3 mx-auto page">
+      {% for qr_code in chunked_qr_codes %}
+
+      <div class="flex flex-col items-center border-2 justify-center h-72">
+          {# always rendering the square to maintain spacing, but only rendering #}
+          {# information in the square when we have a valid qr code #}
+
+          {% if qr_code != "" %}
+          <p>Some wording here</p>
+
+          <figure class="flex flex-col items-center">
+            <img src="https://quickchart.io/qr?text={{ qr_code.serial_number }}" />
+            <figcaption>{{ qr_code.serial_number }}</figcaption>
+          </figure>
+
+          <p>Some more wording</p>
+          {% endif %}
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <div class="grid grid-cols-3 mx-auto page">
+      {% for _ in range(qr_codes_per_page) %}
+
+      <div class="flex flex-col items-center border-2 justify-center h-72">
+          <p>Shit matrix for lyfe</p>
+          <img class="h-1/3 w-1/3" src="{{ assets_directory }}/Marriott_Logo.webp" />
+          <p>some other text</p>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    {% endfor %}
+  </body>
+</html>

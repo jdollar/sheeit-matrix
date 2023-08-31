@@ -1,6 +1,13 @@
+**/*.egg-info
+
+# Build cache directories
+__pycache__/
+build/
+
 dist/*
 !dist/.gitkeep
-**/*.egg-info
-__pycache__/
-test.html
-test.pdf
+
+# Outputs
+*.html
+*.pdf
+*.zip
