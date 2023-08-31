@@ -1,5 +1,6 @@
-dist/
-*.egg-info
+dist/*
+!dist/.gitkeep
+**/*.egg-info
 __pycache__/
 test.html
 test.pdf
