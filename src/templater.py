@@ -138,6 +138,6 @@ def main(
 
     print(f"Created a PDF at this location: {pdf_output.absolute()}")
 
-# When this python file is created, we run the main function
+# When this python file is invoked from the command line, we run the main function
 if __name__ == "__main__":
     typer.run(main)
